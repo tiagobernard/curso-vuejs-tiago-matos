@@ -3,7 +3,10 @@
 
   <div v-if="showName">Nome: {{ firstName }} <br> Sobrenome: {{ lastName }}</div>
 
-  <div v-for="(obj, index) in todos" v-bind:key="obj.id"> {{ index }} - {{ obj.title }}</div>
+  <div v-for="(obj, index) in todos" :key="obj.id">
+    <img v-if="obj.imgSrc" :src="obj.imgSrc" :alt="obj.title"/>
+    {{ index }} - {{ obj.title }}
+  </div>
 
   <div v-if="accessLevel === 'admin'">Admin</div>
   <div v-else-if="accessLevel === 'mkt'">Marketing</div>
@@ -36,25 +39,29 @@ export default {
     "userId": 1,
     "id": 1,
     "title": "delectus aut autem",
-    "completed": false
+    "completed": false,
+    "imgSrc": 'https://via.placeholder.com/150',
   },
   {
     "userId": 1,
     "id": 2,
     "title": "quis ut nam facilis et officia qui",
-    "completed": false
+    "completed": false,
+    "imgSrc": 'https://via.placeholder.com/150',
   },
   {
     "userId": 1,
     "id": 3,
     "title": "fugiat veniam minus",
-    "completed": false
+    "completed": false,
+    "imgSrc": 'https://via.placeholder.com/150',
   },
   {
     "userId": 1,
     "id": 4,
     "title": "et porro tempora",
     "completed": true
+
   },
   {
     "userId": 1,

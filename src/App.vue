@@ -1,6 +1,12 @@
 <template>
   <TheHeader v-if="showHeader"/>
 
+  <h1 :class="{ titulo : true, titulo_home : isHome }">Curso Vue 3</h1>
+
+  <p :class="pClass">Loren ispsun</p>
+
+  <p :style="styleClass">Outro parágrafo</p>
+
   <div v-if="showName">Nome: {{ firstName }} <br> Sobrenome: {{ lastName }}</div>
 
   <div v-for="(obj, index) in todos" :key="obj.id">
@@ -29,8 +35,12 @@ export default {
   },
   data() {
     return {
+      isHome: true,
+      classVar: 'titulo',
+      pClass: ['text', 'texto_home'],
+      styleClass: {color : 'black', backgroundColor : 'aqua', fontSize : '20px'},
       showHeader: true,
-      firstName: 'Jhown',
+      firstName: 'Jhon',
       lastName: 'Snow' ,
       showName:  true,
       accessLevel: 'admin',
@@ -76,6 +86,12 @@ export default {
 </script>
 
 <style>
+
+.titulo {font-size:20px;color:blue;}
+.titulo_home {font-size:40px; color:green}
+.texto {color:orange}
+.texto_home {color:olive;}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

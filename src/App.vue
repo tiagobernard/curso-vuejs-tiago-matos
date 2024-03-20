@@ -1,6 +1,40 @@
 <template>
   <TheHeader v-if="showHeader"/>
 
+  <input type="text" v-model="name" /> <br> {{ name }}
+
+  <div>
+    <select v-model="sports">
+    <option value="futebol">Futebol</option>
+    <option value="skate">Skate</option>
+    <option value="MTB">MTB</option>
+    <option value="Tennis">Tennis</option>
+    </select> <br> {{ sports }}
+  </div>
+
+  <div>
+    <label>Newsletter</label>
+    <input v-model="newsletter" type="radio" value="Sim">Sim
+    <input v-model="newsletter" type="radio" value="Não"> Não
+<br> {{ newsletter }}
+  </div>
+
+  <div>
+    <label>Contrato</label>
+    <input v-model="contrato" type="checkbox">Aceita nossos termos? <b>{{ contrato }}</b>
+  </div>
+
+  <div>
+    <label>Cortes</label>
+    <input v-model="colors" type="checkbox" value="Azul">Azul
+    <input v-model="colors" type="checkbox" value="Amarelo">Amarelo
+    <input v-model="colors" type="checkbox" value="Verde">Verde
+    
+    <br>{{ colors }}
+  </div>
+
+
+
   <h1 :class="{ titulo : true, titulo_home : isHome }">Curso Vue 3</h1>
 
   <p :class="pClass">Loren ispsun</p>
@@ -35,6 +69,11 @@ export default {
   },
   data() {
     return {
+      colors: [] ,
+      contrato: false ,
+      newsletter: '' ,
+      sports: '', 
+      name: 'Tiago Bernardes',
       isHome: true,
       classVar: 'titulo',
       pClass: ['text', 'texto_home'],

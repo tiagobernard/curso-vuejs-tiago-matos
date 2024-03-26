@@ -1,7 +1,19 @@
 <template>
   <TheHeader v-if="showHeader"/>
+<input v-model="names" type="text" ><br>{{ names }}<br>
+ <select v-model="pageCount">
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="15">15</option>
+ </select>
+ {{ pageCount }}<br><br>
 
- Propriedade computada<br>
+ <input v-model="user.firstName" type="text"> <input v-model="user.lastName" type="text"><br>
+ {{ user.firstName }} e {{ user.lastName }}
+
+  <br><br><br>
+===============<br>
+  Propriedade computada<br>
   <button @click="clico()">This</button><br><br>
   {{ fullName }}<br><br>
 <b>tarefas em aberto</b><br>
@@ -12,6 +24,7 @@
   <br><br>
   <b>Todas as tarefas</b>
   <div v-for="todo in todos" :key="todo.id"><input type="checkbox" v-model="todo.completed">{{ todo.title }}</div>
+  <br><br><br>
 ===============
   <form action="https://google.com" @submit.prevent="onSubmit">
     <button type="submit">Enviar google</button>
@@ -91,6 +104,7 @@ export default {
   },
   data() {
     return {
+      pageCount: 5,
       colors: [] ,
       contrato: false ,
       newsletter: '' ,
@@ -149,12 +163,19 @@ export default {
         mouseOut($evt) {console.log('mouse out', $evt)},
         onSubmit() {console.log('submit')},
         onKeyUp($evt) {console.log('OnKeyUp', $evt)},
-        clico() {console.log(this)}
+        clico() {console.log(this)},
+        saveUserName() {console.log('Ajax'), console.log(this.names)},
+        changePage() {console.log('Ajax changePage')}
       },
     computed: {
       fullName() {return `${this.user.firstName} ${this.user.lastName}`},
       uncompletedTodos() {return this.todos.filter(todo => !todo.completed)},
       completedTodos() {return this.todos.filter(todo => todo.completed)}
+    },
+    watch: {
+      names(vl) {if (vl.length >= 3) {this.saveUserName()}},
+      pageCount() {this.changePage()},
+      user: { handler() {console.log('user alterado');}}, deep: true
     }
 }
 </script>

@@ -1,6 +1,18 @@
 <template>
   <TheHeader v-if="showHeader"/>
 
+ Propriedade computada<br>
+  <button @click="clico()">This</button><br><br>
+  {{ fullName }}<br><br>
+<b>tarefas em aberto</b><br>
+  <div v-for="todo in uncompletedTodos" :key="todo.id">{{ todo.title}} - <span>{{ todo.completed }}</span></div>
+
+  <b>tarefas completas</b>
+  <div v-for="todo in completedTodos" :key="todo.id">{{ todo.title }} - {{ todo.completed }}</div>
+  <br><br>
+  <b>Todas as tarefas</b>
+  <div v-for="todo in todos" :key="todo.id"><input type="checkbox" v-model="todo.completed">{{ todo.title }}</div>
+===============
   <form action="https://google.com" @submit.prevent="onSubmit">
     <button type="submit">Enviar google</button>
   </form>
@@ -52,8 +64,7 @@
 
   <p :style="styleClass">Outro parágrafo</p>
 
-  <div v-if="showName">Nome: {{ firstName }} <br> Sobrenome: {{ lastName }}</div>
-
+  <div v-if="showName">Nome: {{ user.firstName }} <br> Sobrenome: {{ user.lastName }}</div>
   <div v-for="(obj, index) in todos" :key="obj.id">
     <img v-if="obj.imgSrc" :src="obj.imgSrc" :alt="obj.title"/>
     {{ index }} - {{ obj.title }}
@@ -91,8 +102,7 @@ export default {
       pClass: ['text', 'texto_home'],
       styleClass: {color : 'black', backgroundColor : 'aqua', fontSize : '20px'},
       showHeader: true,
-      firstName: 'Jhon',
-      lastName: 'Snow' ,
+      user: {firstName: 'Jhon', lastName: 'Snow'} ,
       showName:  true,
       accessLevel: 'admin',
       todos: [
@@ -138,8 +148,14 @@ export default {
         mouseOver() {console.log('mouse over')},
         mouseOut($evt) {console.log('mouse out', $evt)},
         onSubmit() {console.log('submit')},
-        onKeyUp($evt) {console.log('OnKeyUp', $evt)}
-      }
+        onKeyUp($evt) {console.log('OnKeyUp', $evt)},
+        clico() {console.log(this)}
+      },
+    computed: {
+      fullName() {return `${this.user.firstName} ${this.user.lastName}`},
+      uncompletedTodos() {return this.todos.filter(todo => !todo.completed)},
+      completedTodos() {return this.todos.filter(todo => todo.completed)}
+    }
 }
 </script>
 

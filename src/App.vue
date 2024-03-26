@@ -1,6 +1,17 @@
 <template>
   <TheHeader v-if="showHeader"/>
 
+  <form action="https://google.com" @submit.prevent="onSubmit">
+    <button type="submit">Enviar google</button>
+  </form>
+
+  <input type="text" @keyup="onKeyUp" v-model="names" ><br><br> {{ names }} <br><br>
+
+  <button @click.once="onClick()">Enviar</button><br><br>
+
+  <div @mouseover="mouseOver()">Mouse Over</div>
+  <div @mouseout="mouseOut">mouse out</div>
+
   <input type="text" v-model="name" /> <br> {{ name }}
 
   <div>
@@ -74,6 +85,7 @@ export default {
       newsletter: '' ,
       sports: '', 
       name: 'Tiago Bernardes',
+      names: '',
       isHome: true,
       classVar: 'titulo',
       pClass: ['text', 'texto_home'],
@@ -120,7 +132,14 @@ export default {
   }
 ]
     }
-  }
+  },
+  methods: {
+        onClick() {console.log('mouse out')},
+        mouseOver() {console.log('mouse over')},
+        mouseOut($evt) {console.log('mouse out', $evt)},
+        onSubmit() {console.log('submit')},
+        onKeyUp($evt) {console.log('OnKeyUp', $evt)}
+      }
 }
 </script>
 
